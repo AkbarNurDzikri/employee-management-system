@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id String @id
+  username String @unique
+  email String @unique
+  password String
+  fullname String
+  birth_place String?
+  birth_date DateTime? @db.Date
+  religion Religions?
+  nik_ktp String?
+  home_address String?
+  contact String?
+  dept Departments?
+  title Titles?
+  photo String?
+  join_date DateTime? @db.Date
+  leave_balance Decimal @default(0.0) @db.Decimal(3,1)
+  created_at DateTime @default(now())
+  
+  @@map("employees")
+}
+
+enum Religions {
+  Islam
+  Protestan
+  Katolik
+  Hindu
+  Buddha
+  Konghucu
+}
+
+enum Departments {
+  Markerting
+  PPIC
+  Prododuction
+  Warehouse
+  QC
+  RnD
+  IT
+  Managerial
+  HRGA
+}
+
+enum Titles {
+  Operator
+  Helper
+  Staff
+  Admin
+  Leader
+  Supervisor
+  Manager
+  Factory_Manager
+}

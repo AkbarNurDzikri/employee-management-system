@@ -1,0 +1,10 @@
+POST http://localhost:5000/employees/registration
+Content-Type: application/json
+
+{
+  "username": "dzikri23",
+  "email": "xy@gmail.com",
+  "fullname": "Dzikri Nur Akbar",
+  "password": "123456",
+  "confirmPassword": "123456"
+}
