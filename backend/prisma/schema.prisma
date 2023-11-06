@@ -27,7 +27,7 @@ model Employee {
   photo String?
   join_date DateTime? @db.Date
   leave_balance Decimal @default(0.0) @db.Decimal(3,1)
-  token String @db.VarChar(255)
+  token String? @db.VarChar(255)
   isVerified Boolean @default(false)
   created_at DateTime @default(now())
   

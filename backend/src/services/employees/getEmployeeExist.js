@@ -13,16 +13,10 @@ const getEmployeeExist = async (username, email) => {
         username: true,
         email: true,
         dept: true,
-        title: true
+        title: true,
+        token: true
       }
     });
-
-    if(result) {
-      if(result.username === username) return `Maaf, username ${username} sudah terdaftar ! \n Silahkan gunakan username lain.`;
-      if(result.email === email) return `Maaf, email ${email} sudah terdaftar ! \n Periksa kembali inputan Anda.`;
-    } else {
-      return result;
-    }
     return result
   } catch (error) {
     return error.message;

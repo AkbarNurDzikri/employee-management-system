@@ -2,9 +2,9 @@ POST http://localhost:5000/employees/registration
 Content-Type: application/json
 
 {
-  "username": "DZIKRI",
+  "username": "ERP",
   "email": "erp.blasfolie@gmail.com",
-  "fullname": "Dzikri Nur Akbar",
+  "fullname": "ERP",
   "password": "123456",
   "confirmPassword": "123456"
 }

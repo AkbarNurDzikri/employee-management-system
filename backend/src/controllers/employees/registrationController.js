@@ -11,13 +11,16 @@ const employeeRegistration = async (req, res) => {
   } else {
     const {username, email, fullname} = validationResult;
     const isExist = await getEmployeeExist(username, email);
-    if(isExist) return res.status(403).json({errors: isExist});
-  
+    if(isExist !== null) {
+      if(isExist.username === username) return res.status(400).json({errors: `Maaf, username ${username} sudah terdaftar ! \n Silahkan gunakan username lain.`});
+      if(isExist.email === email) return res.status(400).json({errors: `Maaf, email ${email} sudah terdaftar ! \n Periksa kembali inputan Anda.`});
+    }
+
     const token = generatedToken({username, email});
     const addEmployee = await createEmployee(validationResult, token);
     if(addEmployee instanceof Error) return res.status(500).json({errors: addEmployee});
   
-    const sendEmail = await emailVerifySender(email, fullname);
+    const sendEmail = await emailVerifySender(email, fullname, token);
     if(typeof sendEmail === 'object') return res.status(201).json({message: 'Berhasil mendaftarkan akun. \n Kami telah mengirim email verifikasi, lakukan verifikasi email untuk melanjutkan'});
   }
 }
