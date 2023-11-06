@@ -5,7 +5,7 @@ const tokenVerificator = (token) => {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     return decoded;
   } catch (error) {
-    return error;
+    return error.message;
   }
 }
 

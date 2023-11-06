@@ -11,9 +11,11 @@ const getEmployeeExist = async (username, email) => {
       },
       select: {
         username: true,
+        fullname: true,
         email: true,
         dept: true,
         title: true,
+        password: true,
         token: true
       }
     });
