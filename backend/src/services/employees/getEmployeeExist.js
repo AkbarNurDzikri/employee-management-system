@@ -1,12 +1,12 @@
 import myPrisma from "../../config/db.js";
 
-const getEmployeeExist = async (empUsername, empEmail) => {
+const getEmployeeExist = async (username, email) => {
   try {
     const result = await myPrisma.employee.findFirst({
       where: {
         OR: [
-          empUsername ? {username: empUsername.toLowerCase()} : null,
-          empEmail ? {email: empEmail.toLowerCase()} : null
+          username ? {username: username} : null,
+          email ? {email: email} : null
         ].filter(Boolean)
       },
       select: {
@@ -18,9 +18,12 @@ const getEmployeeExist = async (empUsername, empEmail) => {
     });
 
     if(result) {
-      if(result.username === empUsername) return `Maaf, username ${empUsername} sudah terdaftar ! \n Silahkan gunakan username lain.`;
-      if(result.email === empEmail) return `Maaf, email ${empEmail} sudah terdaftar ! \n Periksa kembali inputan Anda.`;
+      if(result.username === username) return `Maaf, username ${username} sudah terdaftar ! \n Silahkan gunakan username lain.`;
+      if(result.email === email) return `Maaf, email ${email} sudah terdaftar ! \n Periksa kembali inputan Anda.`;
+    } else {
+      return result;
     }
+    return result
   } catch (error) {
     return error.message;
   }

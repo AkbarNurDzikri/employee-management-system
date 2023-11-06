@@ -2,8 +2,8 @@ import myPrisma from "../../config/db.js";
 import {v4 as uuid} from 'uuid';
 import bcrypt from 'bcrypt';
 
-const createEmployee = async (formData) => {
-  const {username, email, fullname, password} = formData;
+const createEmployee = async (data, token) => {
+  const {username, email, fullname, password} = data;
   try {
     return await myPrisma.employee.create({
       data: {
@@ -11,11 +11,15 @@ const createEmployee = async (formData) => {
         username,
         email,
         fullname,
-        password: await bcrypt.hash(password, 10)
+        password: await bcrypt.hash(password, 10),
+        token
+      },
+      select: {
+        token: true
       }
     })
   } catch (error) {
-    return error.message;
+    throw new Error(error.message);
   }
 }
 
