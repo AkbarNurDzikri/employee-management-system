@@ -16,7 +16,8 @@ const getEmployeeExist = async (username, email) => {
         dept: true,
         title: true,
         password: true,
-        token: true
+        token: true,
+        isVerified: true
       }
     });
     return result
