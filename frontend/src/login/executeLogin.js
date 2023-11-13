@@ -20,7 +20,10 @@ const executeLogin = async (username, password) => {
         title: 'Berhasil Masuk',
       })
 
-      return  {success: true};
+      const token = sendData.data.token;
+      localStorage.setItem('token', token);
+
+      location.href = '/dashboard';
     }
   } catch (error) {
     Swal.fire({

@@ -1,7 +1,7 @@
 import { Button, Container, Form, FloatingLabel, Row, Col } from 'react-bootstrap';
 import { ShieldLock, PersonCircle, EnvelopeAt, PersonVcardFill, ShieldLockFill } from 'react-bootstrap-icons';
 import { useState } from 'react';
-import executeLogin from './executeRegister.js';
+import executeRegister from './executeRegister.js';
 import LoadingIndicator from '../animation/LoadingIndicator.jsx';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ const RegisterPage = () => {
     e.preventDefault();
 
     setIsLoading(true);
-    const result = await executeLogin(username, fullname, email, password, confirmPassword);
+    const result = await executeRegister(username, fullname, email, password, confirmPassword);
   
     if(result.success === true) {
       setUsername('');

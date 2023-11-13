@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const executeLogin = async (username, fullname, email, password, confirmPassword) => {
+const executeRegister = async (username, fullname, email, password, confirmPassword) => {
   const formData = {
     username,
     fullname,
@@ -37,4 +37,4 @@ const executeLogin = async (username, fullname, email, password, confirmPassword
   }
 }
 
-export default executeLogin
+export default executeRegister
