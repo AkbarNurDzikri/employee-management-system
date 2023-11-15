@@ -6,7 +6,7 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const emailVerifySender = async (userEmail, userFullname, token) => {
+const emailVerificator = async (userEmail, userFullname, token) => {
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -22,7 +22,7 @@ const emailVerifySender = async (userEmail, userFullname, token) => {
 
     const htmlPath = path.join(__dirname, 'template.html');
     let htmlContent = fs.readFileSync(htmlPath, 'utf-8');
-    htmlContent = htmlContent.replace(/{fullname}/g, userFullname);
+    htmlContent = htmlContent.replace(/{nama_lengkap}/g, userFullname);
     htmlContent = htmlContent.replace(/{token}/g, token);
 
     return await transporter.sendMail({
@@ -36,4 +36,4 @@ const emailVerifySender = async (userEmail, userFullname, token) => {
   }
 }
 
-export default emailVerifySender;
+export default emailVerificator;

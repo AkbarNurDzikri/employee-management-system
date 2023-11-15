@@ -15,7 +15,7 @@ const schema = Joi.object({
     'string.empty': 'Email wajib diisi !',
     'string.email': 'Format email salah !'
   }),
-  fullname: Joi.string().required().messages({
+  nama_lengkap: Joi.string().required().messages({
     'string.empty': 'Nama lengkap wajib diisi !',
   }),
   password: Joi.string().min(6).required().messages({
@@ -27,7 +27,7 @@ const schema = Joi.object({
   })
 });
 
-const registerValidation = (formData) => {
+const validasiPendaftaran = (formData) => {
   const validation = schema.validate(formData);
 
   if(validation.error) {
@@ -37,4 +37,4 @@ const registerValidation = (formData) => {
   }
 }
 
-export default registerValidation;
+export default validasiPendaftaran;

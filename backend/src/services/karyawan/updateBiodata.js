@@ -1,14 +1,14 @@
 import myPrisma from '../../config/db.js';
 
-const updateProfile = async (formData, id) => {
+const updateBiodata = async (formData, id) => {
   try {
-    const result = myPrisma.employee.update({
+    const result = await myPrisma.karyawan.update({
       where: {
         id
       },
       data: formData,
       select: {
-        fullname: true,
+        nama_lengkap: true,
       }
     });
 
@@ -18,4 +18,4 @@ const updateProfile = async (formData, id) => {
   }
 }
 
-export default updateProfile;
+export default updateBiodata;

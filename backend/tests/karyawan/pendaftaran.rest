@@ -1,0 +1,10 @@
+POST http://localhost:5000/employees/registration
+Content-Type: application/json
+
+{
+  "username": "khalidsa",
+  "email": "erp.blasfolie@gmail.com",
+  "nama_lengkap": "Khalid Shalahuddin Akbar",
+  "password": "rahasia",
+  "confirmPassword": "rahasia"
+}

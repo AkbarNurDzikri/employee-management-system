@@ -1,0 +1,18 @@
+PATCH http://localhost:5000/employees/biodata/10cc9d8f-480e-455a-b7b2-f060cf978036
+Content-Type: application/json
+
+# {
+#   "pendidikan_terakhir": "S2",
+#   "nik_ktp": "1329847265934544",
+#   "tempat_lahir": "Karawang",
+#   "tgl_lahir": "1945-08-17",
+#   "jurusan_pendidikan": "Teknik Komputer",
+#   "alamat_rumah": "Rengas Dengklok",
+#   "agama": "Islam",
+#   "kontak": "0987123456",
+#   "status_pernikahan": "Menikah"
+# }
+
+{
+  "status_pernikahan": "Belum Menikah"
+}

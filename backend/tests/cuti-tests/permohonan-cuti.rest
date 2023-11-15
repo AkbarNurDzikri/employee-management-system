@@ -1,0 +1,12 @@
+POST http://localhost:5000/cuti/submit
+Content-Type: application/json
+
+{
+  "tglMulai": "2023-10-01",
+  "tglSelesai": "2023-10-10",
+  "setengahHari": true,
+  "hariLibur": true,
+  "jumlahHariLibur": 2,
+  "keteranganCuti": "Tes",
+  "hariCuti": 2
+}

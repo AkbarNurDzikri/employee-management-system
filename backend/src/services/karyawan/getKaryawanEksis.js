@@ -1,8 +1,8 @@
 import myPrisma from "../../config/db.js";
 
-const getEmployeeExist = async (username, email) => {
+const getKaryawanEksis = async (username, email) => {
   try {
-    const result = await myPrisma.employee.findFirst({
+    const result = await myPrisma.karyawan.findFirst({
       where: {
         OR: [
           username ? {username: username} : null,
@@ -11,12 +11,11 @@ const getEmployeeExist = async (username, email) => {
       },
       select: {
         username: true,
-        fullname: true,
+        nama_lengkap: true,
         email: true,
         dept: true,
-        title: true,
+        jabatan: true,
         password: true,
-        token: true,
         isVerified: true
       }
     });
@@ -26,4 +25,4 @@ const getEmployeeExist = async (username, email) => {
   }
 }
 
-export default getEmployeeExist;
+export default getKaryawanEksis;

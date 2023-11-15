@@ -1,19 +1,17 @@
 import myPrisma from "../../config/db.js";
 
-const updateToken = async (username) => {
+const verifikasiUser = async (username) => {
   try {
-    return await myPrisma.employee.update({
+    return await myPrisma.karyawan.update({
       where: {
         username
       },
       data: {
-        isVerified: true,
-        token: null
+        isVerified: true
       },
       select: {
         username: true,
         email: true,
-        token: true
       }
     })
   } catch (error) {
@@ -21,4 +19,4 @@ const updateToken = async (username) => {
   }
 }
 
-export default updateToken;
+export default verifikasiUser;

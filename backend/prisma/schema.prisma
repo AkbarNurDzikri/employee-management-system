@@ -10,31 +10,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Employee {
+model Karyawan {
   id String @id
   username String @unique
   email String @unique
   password String
-  fullname String
-  birth_place String?
-  birth_date DateTime? @db.Date
-  religion Religions?
+  nama_lengkap String
+  tempat_lahir String?
+  tgl_lahir DateTime? @db.Date
+  agama Agama?
   nik_ktp String?
-  home_address String?
-  contact String?
-  dept Departments?
-  title Titles?
-  photo String?
-  join_date DateTime? @db.Date
-  leave_balance Decimal @default(0.0) @db.Decimal(3,1)
-  token String? @db.VarChar(255)
+  alamat_rumah String?
+  status_pernikahan String?
+  kontak String?
+  pendidikan_terakhir PendidikanTerakhir?
+  jurusan_pendidikan String?
+  foto String?
+  tgl_masuk DateTime? @db.Date
+  saldo_cuti Decimal @default(0.0) @db.Decimal(3,1)
+  dept DaftarDepartments?
+  jabatan DaftarJabatan?
   isVerified Boolean @default(false)
   created_at DateTime @default(now())
   
-  @@map("employees")
+  cuti CutiKaryawan[] @relation("CutiKaryawan")
+  approvalCuti CutiKaryawan[] @relation("ApprovalCuti")
+  keluargaKaryawan KeluargaKaryawan[] @relation("KeluargaKaryawan")
+  @@map("karyawan")
 }
 
-enum Religions {
+model KeluargaKaryawan {
+  id String @id
+  karyawan_id String
+  nama_anggota String
+  hubungan HubunganKeluarga
+  tempat_lahir String
+  tgl_lahir DateTime @db.Date
+  pendidikan_terakhir PendidikanTerakhir
+  jurusan_pendidikan String
+  kontak String
+
+  keluargaKaryawan Karyawan @relation("KeluargaKaryawan", fields: [karyawan_id], references: [id])
+  @@map("keluarga_karyawan")
+}
+
+model CutiKaryawan {
+  id String @id
+  karyawan_id String
+  approval_ke String
+  tgl_mulai DateTime @db.Date
+  tgl_selesai DateTime @db.Date
+  setengah_hari Boolean
+  hari_libur Boolean
+  jumlah_hari_libur Decimal @db.Decimal(3, 1)
+  hari_cuti Decimal @db.Decimal(3, 1)
+  keterangan_cuti String
+
+  employee Karyawan @relation("CutiKaryawan", fields: [karyawan_id], references: [id])
+  approval Karyawan @relation("ApprovalCuti", fields: [approval_ke], references: [id])
+
+  @@map("cuti_karyawan")
+}
+
+enum Agama {
   Islam
   Protestan
   Katolik
@@ -43,7 +81,7 @@ enum Religions {
   Konghucu
 }
 
-enum Departments {
+enum DaftarDepartments {
   Markerting
   PPIC
   Prododuction
@@ -55,7 +93,7 @@ enum Departments {
   HRGA
 }
 
-enum Titles {
+enum DaftarJabatan {
   Operator
   Helper
   Staff
@@ -64,4 +102,26 @@ enum Titles {
   Supervisor
   Manager
   Factory_Manager
+}
+
+enum HubunganKeluarga {
+  Suami
+  Istri
+  Anak
+  Kakak
+  Adik
+  Sepupu
+  Ayah
+  Ibu
+  Mertua
+}
+
+enum PendidikanTerakhir {
+  SD
+  SMP
+  SMK
+  SMA
+  D3
+  S1
+  S2
 }
